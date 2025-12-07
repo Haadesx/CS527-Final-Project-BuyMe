@@ -1,6 +1,6 @@
 # BuyMe Auction Platform 🛍️
 
-> A CS 527 Database Systems Project
+> A CS 527 Database Systems for Data Science Project
 
 ![BuyMe Home Screen](./screenshots/home.png)
 
@@ -113,7 +113,7 @@ Open `http://localhost:5000` in your browser.
 *   **I. Swanith reddy** - `si393`
 *   **Harsh Gharlute** - `hg525`
 
-**CS 527: Database Systems**  
+**CS 527: Database Systems for Data Science**  
 Rutgers University
 
 ---
