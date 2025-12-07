@@ -109,7 +109,11 @@ Open `http://localhost:5000` in your browser.
 
 ## 👥 Contributors
 
-**Team Project_Swanit** - CS 527: Database Systems
+**Varesh Patel** - vp752
+**I. Swanith reddy** - si393
+**Harsh Gharlute** - hg525
+
+CS 527: Database Systems
 Rutgers University
 
 ---
