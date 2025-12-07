@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyMe ER Diagram</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: white;
+        }
+
+        .mermaid {
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mermaid">
+        erDiagram
+        USER ||--o{ ITEM : "sells"
+        USER ||--o{ BID : "places"
+        USER ||--o{ QUESTION : "asks"
+        USER ||--o{ QUESTION : "answers"
+        USER ||--o{ ALERT : "creates"
+        USER ||--o{ AUCTION : "wins"
+        USER }o--o{ AUCTION : "participates_in"
+
+        ITEM ||--|| AUCTION : "has"
+
+        AUCTION ||--o{ BID : "receives"
+
+        USER {
+        int id PK
+        string username
+        string email UK
+        string password
+        boolean is_admin
+        boolean is_rep
+        }
+
+        ITEM {
+        int id PK
+        string name
+        string category
+        int seller_id FK
+        }
+
+        AUCTION {
+        int id PK
+        int item_id FK
+        datetime end_time
+        float current_price
+        int winner_id FK
+        }
+
+        BID {
+        int id PK
+        int auction_id FK
+        int bidder_id FK
+        float amount
+        }
+
+        QUESTION {
+        int id PK
+        text text
+        text answer
+        }
+
+        ALERT {
+        int id PK
+        int user_id FK
+        text keywords
+        float max_price
+        }
+    </div>
+</body>
+
+</html>
