@@ -33,6 +33,21 @@ Robust login and registration system using JWT tokens and password hashing.
 Comprehensive auction details showing current price, bid history, and item status.
 ![Auction Details](./screenshots/details.png)
 
+### 🛠️ Admin Control Panel
+Powerful administrative tools for managing the marketplace ecosystem.
+
+#### 1. Command Center / Reports
+View real-time earnings, best-selling items, and category performance.
+![Admin Reports](./screenshots/admin_reports.png)
+
+#### 2. User Management
+Manage platform users, including appointing customer representatives.
+![User Directory](./screenshots/admin_users.png)
+
+#### 3. Q&A Management
+Oversee and moderate user questions and answers.
+![Q&A Screen](./screenshots/admin_qna.png)
+
 ---
 
 ## 🏗️ Technical Architecture
