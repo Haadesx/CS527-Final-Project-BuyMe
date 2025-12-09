@@ -132,4 +132,4 @@ Open `http://localhost:5000` in your browser.
 Rutgers University
 
 ---
-*Built with ❤️ for better auctions.*
+
