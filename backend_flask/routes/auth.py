@@ -59,6 +59,9 @@ def register_user():
     if not email or not password or not first_name or not last_name:
          return jsonify({'message': 'Please fill all required fields'}), 400
 
+    if len(password) < 6:
+        return jsonify({'message': 'Password must be at least 6 characters'}), 400
+
     if User.query.filter_by(email=email).first():
         return jsonify({'message': 'User already exists'}), 400
 

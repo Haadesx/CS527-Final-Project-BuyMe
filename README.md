@@ -2,6 +2,9 @@
 
 > A CS 527 Database Systems for Data Science Project
 
+> [!NOTE] 
+> **Latest UI Update:** We had a last minute change to the UI for the project in the last hour to provide a premium dark-themed experience. Hence, the images in the readme below are the older ones and do not reflect the current modern aesthetics.
+
 ![BuyMe Home Screen](./screenshots/home.png)
 
 A comprehensive, full-stack online auction platform built with **React** and **Flask**, featuring real-time bidding, role-based access control, and advanced administrative capabilities.

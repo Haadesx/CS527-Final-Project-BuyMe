@@ -149,6 +149,22 @@ def delete_auction(id):
     db.session.commit()
     return jsonify({'message': 'Auction removed'})
 
+@auctions_bp.route('/participate/<int:id>', methods=['POST'])
+@protect
+def participate_auction(id):
+    auction = Auction.query.get(id)
+    if not auction:
+        return jsonify({'message': 'Auction not found'}), 404
+        
+    # Check if already participating
+    if request.user in auction.participants:
+         return jsonify({'message': 'Already participating'}), 200
+         
+    auction.participants.append(request.user)
+    db.session.commit()
+    
+    return jsonify({'message': 'Successfully registered for auction'})
+
 # Get similar items (from preceding month)
 @auctions_bp.route('/similar/<int:auction_id>', methods=['GET'])
 def get_similar_items(auction_id):

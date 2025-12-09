@@ -63,9 +63,9 @@ const AuctionDetailScreen = () => {
   const handleParticipate = async () => {
     try {
       await participateInAuction(auction.auction_id).unwrap();
-      toast.success('You have been approved to bid.', { className: '!bg-cream-50 !text-emerald-900 !font-serif !border !border-gold-400' });
+      toast.success('You have been approved to bid.', { className: '!bg-transparent !text-white !font-serif !border !border-gray-700' });
     } catch (err) {
-      toast.error(err?.data?.message || 'Participation failed.', { className: '!bg-cream-50 !text-emerald-900 !font-serif !border !border-gold-400' });
+      toast.error(err?.data?.message || 'Participation failed.', { className: '!bg-transparent !text-white !font-serif !border !border-gray-700' });
     }
   };
 
@@ -83,25 +83,25 @@ const AuctionDetailScreen = () => {
   if (auctionError || itemsError) return <div className="text-center text-red-500 p-6">Error loading collection.</div>;
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-24 pb-12 px-6">
+    <div className="min-h-screen bg-transparent pt-24 pb-12 px-6">
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
         <Fade triggerOnce direction="up">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-emerald-900 mb-6 uppercase tracking-widest">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 uppercase tracking-widest">
             {auction?.auction_title}
           </h1>
           <div className="w-24 h-1 bg-gold-400 mx-auto mb-8" />
-          <p className="text-xl text-charcoal-900/80 font-light max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300/80 font-light max-w-3xl mx-auto leading-relaxed">
             {auction?.auction_desc}
           </p>
 
-          <div className="mt-8 flex justify-center gap-8 text-sm uppercase tracking-widest text-emerald-900/60">
+          <div className="mt-8 flex justify-center gap-8 text-sm uppercase tracking-widest text-white/60">
             <div>
-              <span className="block text-gold-400 font-bold">Opens</span>
+              <span className="block text-blue-400 font-bold">Opens</span>
               {auction?.start_date ? new Date(auction.start_date).toLocaleDateString() : 'TBA'}
             </div>
             <div>
-              <span className="block text-gold-400 font-bold">Closes</span>
+              <span className="block text-blue-400 font-bold">Closes</span>
               {auction?.end_date ? new Date(auction.end_date).toLocaleDateString() : 'TBA'}
             </div>
           </div>
@@ -109,13 +109,13 @@ const AuctionDetailScreen = () => {
           <div className="mt-12 flex justify-center gap-4">
             <button
               onClick={handleParticipate}
-              className="px-8 py-3 bg-emerald-900 text-gold-400 font-serif tracking-widest hover:bg-emerald-800 transition-all shadow-lg border border-gold-400/20"
+              className="px-8 py-3 bg-gray-800 text-blue-400 font-serif tracking-widest hover:bg-emerald-800 transition-all shadow-lg border border-gray-700/20"
             >
               REGISTER TO BID
             </button>
             <Link
               to="/qna"
-              className="px-8 py-3 bg-transparent border border-emerald-900 text-emerald-900 font-serif tracking-widest hover:bg-emerald-900 hover:text-gold-400 transition-all"
+              className="px-8 py-3 bg-transparent border border-emerald-900 text-white font-serif tracking-widest hover:bg-gray-800 hover:text-blue-400 transition-all"
             >
               CONCIERGE (Q&A)
             </Link>
@@ -125,45 +125,45 @@ const AuctionDetailScreen = () => {
 
       {/* Items Grid */}
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-serif text-emerald-900 mb-8 border-b border-gold-400/30 pb-4">
-          Lot Catalogue <span className="text-gold-400 ml-2 text-lg align-top">{items.length} Items</span>
+        <h2 className="text-2xl font-serif text-white mb-8 border-b border-gray-700/30 pb-4">
+          Lot Catalogue <span className="text-blue-400 ml-2 text-lg align-top">{items.length} Items</span>
         </h2>
 
         {items.length === 0 ? (
-          <div className="text-center py-20 bg-white border border-gold-400/20">
-            <p className="text-charcoal-900 font-light italic">This collection is currently empty.</p>
+          <div className="text-center py-20 bg-gray-900 border border-gray-700/20">
+            <p className="text-gray-300 font-light italic">This collection is currently empty.</p>
           </div>
         ) : (
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {items.map((item, index) => (
               <Fade key={item.item_id} triggerOnce direction="up" delay={index * 100}>
                 <div
-                  className="group bg-white border border-gold-400/10 hover:border-gold-400 transition-all duration-500 cursor-pointer shadow-sm hover:shadow-2xl overflow-hidden"
+                  className="group bg-gray-900 border border-gray-700/10 hover:border-gray-700 transition-all duration-500 cursor-pointer shadow-sm hover:shadow-2xl overflow-hidden"
                   onClick={() => {
                     setSelectedItemId(item.item_id);
                     setShowItemModal(true);
                   }}
                 >
                   <div className="relative h-80 overflow-hidden">
-                    <div className="absolute inset-0 bg-emerald-900/0 group-hover:bg-emerald-900/10 transition-colors duration-500 z-10" />
+                    <div className="absolute inset-0 bg-gray-800/0 group-hover:bg-gray-800/10 transition-colors duration-500 z-10" />
                     <img
                       src={item.image_url || 'https://placehold.co/300x200'}
                       alt={item.item_name}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                     />
-                    <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent z-20">
-                      <p className="text-gold-400 font-serif text-lg italic">Starting at ${item.start_price?.toLocaleString()}</p>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20">
+                      <p className="text-blue-400 font-serif text-lg italic">Starting at ${item.start_price?.toLocaleString()}</p>
                     </div>
                   </div>
 
                   <div className="p-6 text-center">
-                    <h3 className="text-xl font-serif font-bold text-emerald-900 mb-2 group-hover:text-gold-500 transition-colors">
+                    <h3 className="text-xl font-serif font-bold text-white mb-2 group-hover:text-gold-500 transition-colors">
                       {item.item_name}
                     </h3>
-                    <p className="text-sm text-charcoal-900/60 line-clamp-2 font-light mb-4">
+                    <p className="text-sm text-gray-300/60 line-clamp-2 font-light mb-4">
                       {item.item_desc}
                     </p>
-                    <span className="inline-block px-6 py-2 border border-emerald-900 text-emerald-900 text-xs uppercase tracking-widest group-hover:bg-emerald-900 group-hover:text-gold-400 transition-all duration-300">
+                    <span className="inline-block px-6 py-2 border border-emerald-900 text-white text-xs uppercase tracking-widest group-hover:bg-gray-800 group-hover:text-blue-400 transition-all duration-300">
                       View Lot Details
                     </span>
                   </div>

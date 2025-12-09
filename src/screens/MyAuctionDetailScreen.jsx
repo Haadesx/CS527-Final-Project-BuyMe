@@ -80,7 +80,7 @@ const MyAuctionDetailScreen = () => {
 
   return (
     <div className="p-6">
-      <div className="bg-white shadow-md rounded p-6 mb-8 flex justify-between items-center">
+      <div className="bg-gray-900 shadow-md rounded p-6 mb-8 flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold mb-2">{auction?.auction_title}</h1>
           <p className="text-gray-700 mb-4">{auction?.auction_desc}</p>
@@ -103,7 +103,7 @@ const MyAuctionDetailScreen = () => {
           {items.map((item) => (
             <div
               key={item.id}
-              className="bg-white shadow-md rounded p-4 cursor-pointer hover:shadow-lg transition"
+              className="bg-gray-900 shadow-md rounded p-4 cursor-pointer hover:shadow-lg transition"
               onClick={() => {
                 setSelectedItemId(item.item_id);
                 setShowItemModal(true);
@@ -112,7 +112,7 @@ const MyAuctionDetailScreen = () => {
               <img
                 src={item.image_url || 'https://placehold.co/300x200'}
                 alt={item.item_name}
-                className="w-full h-40 object-contain rounded mb-4 bg-white"
+                className="w-full h-40 object-contain rounded mb-4 bg-gray-900"
               />
               <h3 className="text-lg font-bold mb-2">{item.item_name}</h3>
               <p className="text-gray-700 mb-2">{item.item_desc}</p>

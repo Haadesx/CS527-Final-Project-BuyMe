@@ -30,14 +30,14 @@ const NotificationsPage = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6 font-serif text-emerald-900">Notifications & Alerts</h1>
+            <h1 className="text-3xl font-bold mb-6 font-serif text-white">Notifications & Alerts</h1>
 
             {isLoading ? (
                 <Loader />
             ) : error ? (
                 <Message variant="danger">{error?.data?.message || error.error}</Message>
             ) : (
-                <div className="bg-white shadow-md rounded-lg p-6">
+                <div className="bg-gray-900 shadow-md rounded-lg p-6">
                     {alerts && alerts.length === 0 ? (
                         <Message>No active alerts found.</Message>
                     ) : (

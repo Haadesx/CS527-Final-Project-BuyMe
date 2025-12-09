@@ -49,4 +49,4 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Error creating tables: {e}")
             
-    app.run(port=3500, debug=True)
+    app.run(port=5555, debug=True)

@@ -23,39 +23,39 @@ const AuctionsScreen = () => {
   const auctions = data?.data || [];
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-24 pb-12 px-6">
+    <div className="min-h-screen w-full bg-transparent pt-24 pb-12 px-6">
       <div className="max-w-7xl mx-auto">
         <Fade triggerOnce direction="up">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-emerald-900 mb-4 uppercase tracking-widest">The Catalogue</h1>
-            <p className="text-charcoal-900/60 font-light italic">Curated lots for the discerning collector.</p>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4 uppercase tracking-widest">The Catalogue</h1>
+            <p className="text-gray-300/60 font-light italic">Curated lots for the discerning collector.</p>
           </div>
         </Fade>
 
         {/* Filters */}
         <Fade triggerOnce direction="up" delay={200}>
-          <div className="bg-white p-6 border border-gold-400/20 shadow-lg mb-12">
+          <div className="bg-gray-900 p-6 border border-gray-700/20 shadow-lg mb-12">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
 
               {/* Keyword */}
               <div className="group">
-                <label className="block text-xs uppercase tracking-widest text-gold-400/80 mb-2">Search</label>
+                <label className="block text-xs uppercase tracking-widest text-blue-400/80 mb-2">Search</label>
                 <input
                   type="text"
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
-                  className="w-full bg-transparent border-b border-gold-400/30 text-emerald-900 py-2 focus:outline-none focus:border-gold-400 transition-colors font-serif"
+                  className="w-full bg-transparent border-b border-gray-700/30 text-white py-2 focus:outline-none focus:border-gray-700 transition-colors font-serif"
                   placeholder="Keywords..."
                 />
               </div>
 
               {/* Category */}
               <div className="group">
-                <label className="block text-xs uppercase tracking-widest text-gold-400/80 mb-2">Category</label>
+                <label className="block text-xs uppercase tracking-widest text-blue-400/80 mb-2">Category</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-transparent border-b border-gold-400/30 text-emerald-900 py-2 focus:outline-none focus:border-gold-400 transition-colors font-serif"
+                  className="w-full bg-transparent border-b border-gray-700/30 text-white py-2 focus:outline-none focus:border-gray-700 transition-colors font-serif"
                 >
                   <option value="All">All Categories</option>
                   <option value="Luxury Vehicles">Luxury Vehicles</option>
@@ -68,35 +68,35 @@ const AuctionsScreen = () => {
 
               {/* Min Price */}
               <div className="group">
-                <label className="block text-xs uppercase tracking-widest text-gold-400/80 mb-2">Min Price</label>
+                <label className="block text-xs uppercase tracking-widest text-blue-400/80 mb-2">Min Price</label>
                 <input
                   type="number"
                   value={minPrice}
                   onChange={(e) => setMinPrice(e.target.value)}
-                  className="w-full bg-transparent border-b border-gold-400/30 text-emerald-900 py-2 focus:outline-none focus:border-gold-400 transition-colors font-serif"
+                  className="w-full bg-transparent border-b border-gray-700/30 text-white py-2 focus:outline-none focus:border-gray-700 transition-colors font-serif"
                   placeholder="$0"
                 />
               </div>
 
               {/* Max Price */}
               <div className="group">
-                <label className="block text-xs uppercase tracking-widest text-gold-400/80 mb-2">Max Price</label>
+                <label className="block text-xs uppercase tracking-widest text-blue-400/80 mb-2">Max Price</label>
                 <input
                   type="number"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="w-full bg-transparent border-b border-gold-400/30 text-emerald-900 py-2 focus:outline-none focus:border-gold-400 transition-colors font-serif"
+                  className="w-full bg-transparent border-b border-gray-700/30 text-white py-2 focus:outline-none focus:border-gray-700 transition-colors font-serif"
                   placeholder="No Limit"
                 />
               </div>
 
               {/* Sort */}
               <div className="group">
-                <label className="block text-xs uppercase tracking-widest text-gold-400/80 mb-2">Sort By</label>
+                <label className="block text-xs uppercase tracking-widest text-blue-400/80 mb-2">Sort By</label>
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="w-full bg-transparent border-b border-gold-400/30 text-emerald-900 py-2 focus:outline-none focus:border-gold-400 transition-colors font-serif"
+                  className="w-full bg-transparent border-b border-gray-700/30 text-white py-2 focus:outline-none focus:border-gray-700 transition-colors font-serif"
                 >
                   <option value="">Newest Arrivals</option>
                   <option value="price_asc">Price: Low to High</option>
@@ -118,8 +118,8 @@ const AuctionsScreen = () => {
             {error?.data?.message || 'Error fetching catalogue.'}
           </div>
         ) : auctions.length === 0 ? (
-          <div className="text-center py-20 border border-gold-400/10 bg-white">
-            <p className="text-charcoal-900 font-light italic">No lots found matching your criteria.</p>
+          <div className="text-center py-20 border border-gray-700/10 bg-gray-900">
+            <p className="text-gray-300 font-light italic">No lots found matching your criteria.</p>
           </div>
         ) : (
           <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

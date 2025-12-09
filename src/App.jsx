@@ -1,16 +1,18 @@
 import React from 'react'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-cream-50 text-charcoal-900 font-sans selection:bg-gold-400 selection:text-emerald-900">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="pt-0">
+      <main className="flex-grow w-full">
         <Outlet />
       </main>
+      <Footer />
       <ToastContainer
         position="bottom-right"
         autoClose={4000}
@@ -21,9 +23,7 @@ const App = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
-        toastClassName="!bg-cream-50 !text-emerald-900 !font-serif !border !border-gold-400"
-        progressClassName="!bg-gold-400"
+        theme="dark"
       />
     </div>
   )

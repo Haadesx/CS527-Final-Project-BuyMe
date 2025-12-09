@@ -58,7 +58,7 @@ const MyBiddingsScreen = () => {
       ) : (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
-            <div key={item.item_id} className="bg-white shadow rounded p-4 relative">
+            <div key={item.item_id} className="bg-gray-900 shadow rounded p-4 relative">
               {item.is_won && (
                 <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                   You won this item
