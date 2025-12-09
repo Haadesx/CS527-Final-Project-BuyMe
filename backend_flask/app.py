@@ -27,6 +27,9 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     app.register_blueprint(questions_bp, url_prefix='/api/question')
     app.register_blueprint(alerts_bp, url_prefix='/api/alert')
+    
+    from routes.notifications import notifications_bp
+    app.register_blueprint(notifications_bp, url_prefix='/api/notification')
 
     @app.route('/')
     def index():

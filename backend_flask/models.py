@@ -170,3 +170,27 @@ class Alert(db.Model):
             'created_at': self.created_at.isoformat() + 'Z' if self.created_at else None
         }
 
+
+class Notification(db.Model):
+    __tablename__ = 'notifications'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+    type = db.Column(db.String(50), default='info') # info, success, warning, error
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    # Relationship handled by backref on User if we wanted, or here
+    user_rel = db.relationship('User', backref=db.backref('notifications', lazy=True))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'title': self.title,
+            'description': self.description,
+            'type': self.type,
+            'is_read': self.is_read,
+            'time': self.created_at.isoformat() + 'Z' if self.created_at else None
+        }

@@ -72,6 +72,7 @@ export const auctionApiSlice = apiSlice.injectEndpoints({
         url: `/api/auction/participate/${auctionId}`,
         method: 'POST',
       }),
+      invalidatesTags: ['Auction'],
     }),
 
   }),

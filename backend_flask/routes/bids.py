@@ -35,11 +35,15 @@ def place_bid(item_id):
         if amount < auction.initial_price:
              return jsonify({'message': f'Bid must be at least start price {auction.initial_price}'}), 400
     elif amount < min_bid:
-        return jsonify({'message': f'Bid must be at least {min_bid}'}), 400
+        return jsonify({'message': f'Bid must be at least {min_bid} (Current: {auction.current_price} + Increment: {auction.increment})'}), 400
         
     # Check against current highest bid
     # (Already checked by current_price sort of, but let's be safe)
     
+    # Identify previous winner to notify
+    previous_winner_id = auction.winner_id
+    previous_high_bid = auction.current_price
+
     # Place Bid
     new_bid = Bid(
         auction_id=auction.id,
@@ -59,6 +63,17 @@ def place_bid(item_id):
     if request.user not in auction.participants:
         auction.participants.append(request.user)
         
+    # Notify previous winner if they exist and are not the current bidder
+    if previous_winner_id and previous_winner_id != request.user.id:
+        from models import Notification
+        notification = Notification(
+            user_id=previous_winner_id,
+            title='Outbid Alert',
+            description=f'You have been outbid on "{item.name}". The new price is ${amount}.',
+            type='warning'
+        )
+        db.session.add(notification)
+
     db.session.commit()
     
     # Resolve Auto-Bidding

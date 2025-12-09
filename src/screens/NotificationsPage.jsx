@@ -1,75 +1,71 @@
-import React, { useEffect } from 'react';
-import { useGetNotificationsQuery, useNotifyBidMutation } from '../slices/notificationApiSlice';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useGetAlertsQuery, useDeleteAlertMutation } from '../slices/alertsApiSlice';
+import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
-import { FaSyncAlt } from 'react-icons/fa';
-import { Fade } from 'react-awesome-reveal';
+import Message from '../components/Message';
 
 const NotificationsPage = () => {
-  const [notifyBid] = useNotifyBidMutation();
-  const { data, isLoading, error, refetch } = useGetNotificationsQuery();
-  let notifications = [...(data?.data || [])].reverse();
+    const { userInfo } = useSelector((state) => state.auth);
+    const { data: alerts, isLoading, error, refetch } = useGetAlertsQuery();
+    const [deleteAlert] = useDeleteAlertMutation();
 
-  const handleRefresh = async () => {
-    try {
-      await notifyBid();
-      console.log('Notifiy sent!')
-      refetch();
-    } catch (err) {
-      console.error('Notification API error:', err);
-    }
-  };
+    useEffect(() => {
+        if (userInfo) {
+            refetch();
+        }
+    }, [userInfo, refetch]);
 
-  useEffect(() => {
-    const sendNotification = async () => {
-      try {
-        await notifyBid();
-      } catch (err) {
-        console.error('Notification API error:', err);
-      }
+    const handleDelete = async (id) => {
+        if (window.confirm('Are you sure you want to delete this alert?')) {
+            try {
+                await deleteAlert(id).unwrap();
+                toast.success('Alert deleted');
+                refetch();
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        }
     };
-  
-    sendNotification();
-    refetch();
-  }, [notifyBid, refetch]);
 
-  return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">Notifications</h2>
+    return (
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold mb-6 font-serif text-emerald-900">Notifications & Alerts</h1>
 
-        { isLoading ? (
-          <Loader/>
-          ):(
-          <button
-            onClick={handleRefresh}
-            className="flex items-center space-x-2 text-blue-600 hover:text-blue-800"
-          >
-            <FaSyncAlt className="mr-1" /> Refresh
-          </button>
-        )}
-      </div>
-
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <div className="text-red-500">Failed to load notifications.</div>
-      ) : notifications.length === 0 ? (
-        <div className="text-gray-500">No notifications available.</div>
-      ) : (
-        <Fade cascade direction="right" triggerOnce>
-        <ul className="space-y-4">
-          {notifications.map((notif) => (
-            <li key={notif.id} className="bg-white shadow p-4 rounded">
-              <p className="text-xs text-gray-400 mb-1">Notification Type: <span className="font-semibold text-blue-500">{notif.topic}</span></p>
-              <p className="font-semibold text-blue-700">{notif.title}</p>
-              <p className="text-sm text-gray-700 mt-1">{notif.description}</p>
-            </li>
-          ))}
-        </ul>
-        </Fade>
-      )}
-    </div>
-  );
+            {isLoading ? (
+                <Loader />
+            ) : error ? (
+                <Message variant="danger">{error?.data?.message || error.error}</Message>
+            ) : (
+                <div className="bg-white shadow-md rounded-lg p-6">
+                    {alerts && alerts.length === 0 ? (
+                        <Message>No active alerts found.</Message>
+                    ) : (
+                        <ul className="divide-y divide-gray-200">
+                            {alerts.map((alert) => (
+                                <li key={alert._id} className="py-4 flex justify-between items-center">
+                                    <div>
+                                        <p className="text-lg font-semibold text-emerald-800">
+                                            Keyword: <span className="font-bold">{alert.keyword}</span>
+                                        </p>
+                                        <p className="text-sm text-gray-500">
+                                            Created: {new Date(alert.created_at).toLocaleDateString()}
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={() => handleDelete(alert._id)}
+                                        className="text-red-600 hover:text-red-800 font-medium"
+                                    >
+                                        Delete
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default NotificationsPage;
