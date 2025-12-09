@@ -13,10 +13,7 @@ def test_questions():
     
     # Login as a regular user
     print("\n1. Login as regular user...")
-    login_data = {
-        "email": "testuser@example.com",
-        "password": "password"
-    }
+    login_data = {"email": "user1@example.com", "password": "newpassword123"}
     response = requests.post(f"{BASE_URL}/auth/login", json=login_data)
     print(f"Status: {response.status_code}")
     if response.status_code == 200:

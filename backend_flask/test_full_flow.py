@@ -75,8 +75,9 @@ def run_test():
     # No, check models.py: 'item': self.item.to_dict()
     # And 'item' dict has '_id'.
     
-    item_id = auction['item']['_id']
-    auction_id = auction['_id']
+    auction_data = auction['data']
+    item_id = auction_data['item_id']
+    auction_id = auction_data['auction_id']
     print(f"Created Auction {auction_id} with Item {item_id}")
 
     # 4. User B bids
@@ -93,8 +94,8 @@ def run_test():
 
     # 7. Check final status
     res = requests.get(f"{BASE_URL}/auction/{auction_id}")
-    final_auction = res.json()
-    print(f"Final Price: {final_auction['currentPrice']} Winner: {final_auction['winner']}")
+    final_auction = res.json()['data']
+    print(f"Final Price: {final_auction['current_price']} Winner: {final_auction['winner_id']}")
 
 if __name__ == "__main__":
     run_test()

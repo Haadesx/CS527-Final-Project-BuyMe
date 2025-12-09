@@ -14,7 +14,7 @@ def test_new_features():
     
     # Login as regular user
     print("\n1. Testing User Login...")
-    login_data = {"email": "testuser@example.com", "password": "password"}
+    login_data = {"email": "user1@example.com", "password": "password1"}
     response = requests.post(f"{BASE_URL}/auth/login", json=login_data)
     if response.status_code == 200:
         user_token = response.json().get('data')

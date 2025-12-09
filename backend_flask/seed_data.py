@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 app = create_app()
 
 with app.app_context():
+    db.create_all()
     # Admin
     if not User.query.filter_by(email='admin@buyme.com').first():
         admin = User(
@@ -34,6 +35,34 @@ with app.app_context():
         )
         db.session.add(seller)
         print("Seller created.")
+
+    # User1
+    if not User.query.filter_by(email='user1@example.com').first():
+        user1 = User(
+            username='user1',
+            first_name='Test',
+            last_name='User1',
+            email='user1@example.com',
+            password=generate_password_hash('password1'),
+            is_admin=False,
+            is_rep=False
+        )
+        db.session.add(user1)
+        print("User1 created.")
+
+    # User2
+    if not User.query.filter_by(email='user2@example.com').first():
+        user2 = User(
+            username='user2',
+            first_name='Test',
+            last_name='User2',
+            email='user2@example.com',
+            password=generate_password_hash('password2'),
+            is_admin=False,
+            is_rep=False
+        )
+        db.session.add(user2)
+        print("User2 created.")
     
     db.session.commit() # Get IDs
 

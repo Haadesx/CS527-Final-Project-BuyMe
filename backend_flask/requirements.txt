@@ -4,3 +4,4 @@ Flask-Cors
 cryptography
 PyMySQL
 python-dotenv
+PyJWT
